@@ -47,14 +47,9 @@ spec:
       source:
         repoURL: git@github.com:code-sourabh/argo-cluster.git
         targetRevision: HEAD
-        path: "kubernetes/resources/{{appName}}"
-        helm:
-          # Release name override (defaults to application name)
-          releaseName: "{{appName}}"
-          valueFiles:
-          - values.yaml
+        path: "applications/{{appName}}"
       destination:
-        server: in-cluster
+        server: "{{serverName}}"
         namespace: "{{namespace}}"
       syncPolicy:
         automated:
