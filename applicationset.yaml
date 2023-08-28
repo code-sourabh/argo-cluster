@@ -9,36 +9,43 @@ spec:
       - cluster: in-cluster
         serverName: https://kubernetes.default.svc
         namespace: default
-        appName: 
+        appName: blue-green
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
-        appName: 
+        appName: guestbook
       - cluster: in-cluster
         serverName: https://kubernetes.default.svc
         namespace: default
-        appName: 
+        appName: helm-guestbook
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
-        appName: 
+        appName: jsonnet-guestbook
       - cluster: in-cluster
         serverName: https://kubernetes.default.svc
         namespace: default
-        appName: 
+        appName: jsonnet-guestbook-tla
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
+        appName: ksonnet-guestbook
+      - cluster: in-cluster
+        serverName: https://kubernetes.default.svc
+        namespace: default
+        appName: kustomize-guestbook
+      - cluster: gke-c2
+        serverName: https://34.31.156.179
+        namespace: sourabh
+        appName: pre-post-sync
       
   template:
     metadata:
       name: "{{appName}}"
-      annotations:
-        argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
       project: default
       source:
-        repoURL: https://github.com/JulienJourdain/infrastructure.git
+        repoURL: git@github.com:code-sourabh/argo-cluster.git
         targetRevision: HEAD
         path: "kubernetes/resources/{{appName}}"
         helm:
