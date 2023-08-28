@@ -7,10 +7,18 @@ metadata:
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
-    spec:
-      containers:
-      - name: sleep
-        image: alpine:latest
-        command: ["sleep", "10"]
-      restartPolicy: Never
-  backoffLimit: 0 
+        spec:
+            containers:
+            - name: flock-notification
+            image: curlimages/curl
+            command:
+                - "curl"
+                - "-X"
+                - "POST"
+                - "https://api.flock.com/hooks/sendMessage/b609601e-5bef-45ef-9733-732568901461"
+                - "-H"
+                - "Content-Type: application/json"
+                - "-d"
+                - '{"text": "Sourabh - Pre sync hook executed successfully"}'
+            restartPolicy: Never
+        backoffLimit: 2
