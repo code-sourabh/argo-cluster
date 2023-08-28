@@ -10,40 +10,48 @@ spec:
         serverName: https://kubernetes.default.svc
         namespace: default
         appName: blue-green
+        project: assignment
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
         appName: guestbook
+        project: default
       - cluster: in-cluster
         serverName: https://kubernetes.default.svc
         namespace: default
         appName: helm-guestbook
+        project: assignment
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
         appName: jsonnet-guestbook
+        project: default
       - cluster: in-cluster
         serverName: https://kubernetes.default.svc
         namespace: default
         appName: jsonnet-guestbook-tla
+        project: assignment
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
         appName: ksonnet-guestbook
+        project: default
       - cluster: in-cluster
         serverName: https://kubernetes.default.svc
         namespace: default
         appName: kustomize-guestbook
+        project: assignment
       - cluster: gke-c2
         serverName: https://34.31.156.179
         namespace: sourabh
         appName: pre-post-sync
+        project: default
       
   template:
     metadata:
       name: "{{appName}}"
     spec:
-      project: default
+      project: "{{project}}"
       source:
         repoURL: git@github.com:code-sourabh/argo-cluster.git
         targetRevision: HEAD
